@@ -122,6 +122,15 @@ const editBookByIdHandler = (request, h) => {
 
   const index = books.findIndex((book) => book.id === bookId);
 
+  if (name === undefined) {
+    const response = h.response({
+      status: "fail",
+      message: "Gagal memperbarui buku. Mohon isi nama buku",
+    });
+    response.code(400);
+    return response;
+  }
+
   if (index !== -1) {
     books[index] = {
       ...books[index],
