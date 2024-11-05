@@ -75,12 +75,26 @@ const addBookHandler = (request, h) => {
   }
 };
 
-const getAllBooksHandler = () => ({
-  status: "success",
-  data: {
-    books,
-  },
-});
+const getAllBooksHandler = (request, h) => {
+  const { name, reading, finished } = request.query;
+
+  if (reading === "1") {
+    const book = books.filter((n) => n.reading === true);
+    return {
+      status: "success",
+      data: {
+        book,
+      },
+    };
+  }
+
+  return {
+    status: "success",
+    data: {
+      books,
+    },
+  };
+};
 
 const getBookByIdHandler = (request, h) => {
   const { bookId } = request.params;
