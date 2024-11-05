@@ -146,7 +146,7 @@ const editBookByIdHandler = (request, h) => {
 
   const response = h.response({
     status: "fail",
-    message: "Gagal memperbarui buku. Mohon isi nama buku",
+    message: "Gagal memperbarui buku. Id tidak ditemukan",
   });
   response.code(404);
   return response;
