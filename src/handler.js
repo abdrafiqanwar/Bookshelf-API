@@ -90,6 +90,10 @@ const getAllBooksHandler = (request, h) => {
       finished === "1"
         ? books.filter((n) => n.finished === true)
         : books.filter((n) => n.finished === false);
+  } else if (name !== undefined) {
+    if (name.toLowerCase() === "dicoding") {
+      book = books.filter((n) => n.name.toLowerCase().includes("dicoding"));
+    }
   }
 
   return {
