@@ -100,6 +100,12 @@ const getAllBooksHandler = (request, h) => {
     }
   }
 
+  book = book.map((n) => ({
+    id: n.id,
+    name: n.name,
+    publisher: n.publisher,
+  }));
+
   return {
     status: "success",
     data: {
