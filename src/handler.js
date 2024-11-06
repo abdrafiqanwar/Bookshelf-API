@@ -113,7 +113,7 @@ const getAllBooksHandler = (request, h) => {
 const getBookByIdHandler = (request, h) => {
   const { bookId } = request.params;
 
-  const book = books.filter((n) => n.id === bookId)[0];
+  let book = books.filter((n) => n.id === bookId)[0];
 
   if (book === undefined) {
     const response = h.response({
@@ -124,10 +124,25 @@ const getBookByIdHandler = (request, h) => {
     return response;
   }
 
+  book = {
+    id: book.id,
+    name: book.name,
+    year: book.year,
+    author: book.author,
+    summary: book.summary,
+    publisher: book.publisher,
+    pageCount: book.pageCount,
+    readPage: book.readPage,
+    finished: book.finished,
+    reading: book.reading,
+    insertedAt: book.insertedAt,
+    updatedAt: book.updatedAt,
+  };
+
   return {
     status: "success",
     data: {
-      books,
+      book: book,
     },
   };
 };
