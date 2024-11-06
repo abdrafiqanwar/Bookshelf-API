@@ -85,6 +85,11 @@ const getAllBooksHandler = (request, h) => {
       reading === "1"
         ? books.filter((n) => n.reading === true)
         : books.filter((n) => n.reading === false);
+  } else if (finished !== undefined) {
+    book =
+      finished === "1"
+        ? books.filter((n) => n.finished === true)
+        : books.filter((n) => n.finished === false);
   }
 
   return {
