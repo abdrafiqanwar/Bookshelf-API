@@ -78,20 +78,19 @@ const addBookHandler = (request, h) => {
 const getAllBooksHandler = (request, h) => {
   const { name, reading, finished } = request.query;
 
-  if (reading === "1") {
-    const book = books.filter((n) => n.reading === true);
-    return {
-      status: "success",
-      data: {
-        book,
-      },
-    };
+  let book = books;
+
+  if (reading !== undefined) {
+    book =
+      reading === "1"
+        ? books.filter((n) => n.reading === true)
+        : books.filter((n) => n.reading === false);
   }
 
   return {
     status: "success",
     data: {
-      books,
+      book,
     },
   };
 };
