@@ -39,10 +39,6 @@ const addBookHandler = (request, h) => {
     updatedAt,
   };
 
-  books.push(newBook);
-
-  const isSuccess = books.filter((book) => book.id === id).length > 0;
-
   if (name === undefined) {
     const response = h.response({
       status: "fail",
@@ -62,6 +58,10 @@ const addBookHandler = (request, h) => {
     return response;
   }
 
+  books.push(newBook);
+
+  const isSuccess = books.filter((book) => book.id === id).length > 0;
+
   if (isSuccess) {
     const response = h.response({
       status: "success",
@@ -78,13 +78,11 @@ const addBookHandler = (request, h) => {
 const getAllBooksHandler = (request, h) => {
   const { name, reading, finished } = request.query;
 
-  let book = books.map((n) => {
-    return {
-      id: n.id,
-      name: n.name,
-      publisher: n.publisher,
-    };
-  });
+  let book = books.map((n) => ({
+    id: n.id,
+    name: n.name,
+    publisher: n.publisher,
+  }));
 
   if (reading !== undefined) {
     book =
