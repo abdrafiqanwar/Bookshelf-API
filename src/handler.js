@@ -78,7 +78,13 @@ const addBookHandler = (request, h) => {
 const getAllBooksHandler = (request, h) => {
   const { name, reading, finished } = request.query;
 
-  let book = books;
+  let book = books.map((n) => {
+    return {
+      id: n.id,
+      name: n.name,
+      publisher: n.publisher,
+    };
+  });
 
   if (reading !== undefined) {
     book =
@@ -99,7 +105,7 @@ const getAllBooksHandler = (request, h) => {
   return {
     status: "success",
     data: {
-      book,
+      books: book,
     },
   };
 };
